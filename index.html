@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div id="app">
+    <div class="main-container">
+    <!-- Logik för att visa alla randomiserade citat-->
+    <button class="option" @click="toggleModal">Show all randomized quotes</button>
+    <button class="option" @click="refreshPage">Start a new round</button>
+    <div class="modal-container" :class="{ 'show': showModal }">
+        <div class="modal">
+            <button @click="toggleModal" class="CloseModal">Close</button>
+            <ul>
+                <!-- Använd quote-item-komponenten här -->
+                <quote-item v-for="(quote, index) in quotes" :key="index" :quote="quote.quote" />
+            </ul>
+        </div>
+    </div>
+    <h1>How it works</h1>
+    <p>You will be presented with two quotes - select the one that speaks to you the most. In total there are
+        ten quotes that are competing for your glory. Which one will rule them all? 
+    </p>
+    <div class="QuoteBoard">
+    <!-- visa de två första citaten i arrayen -->
+        <ul>
+            <button v-for="(quote, index) in quotes.slice(0, 2)" :key="index" @click="selectedQuote(index)">
+                {{ quote.quote }}
+            </button>
+        </ul>
+    </div>
+</div> <!--closing tag main-container-->
+</div> <!--closing tag för div id="app"-->
+     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
